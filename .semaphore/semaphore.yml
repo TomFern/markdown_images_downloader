@@ -5,7 +5,7 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Backend lint
+  - name: Frontend lint
     task:
       jobs:
         - name: Lint
@@ -36,7 +36,7 @@ blocks:
       - Frontend test
     task:
       jobs:
-        - name: 'Nightwatch '
+        - name: 'Nightwatch  '
           commands: []
   - name: Release candidate
     dependencies:
@@ -50,18 +50,20 @@ blocks:
       - Frontend build
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Unit 1/2
+          commands: []
+        - name: Unit 2/2
           commands: []
   - name: Frontend build
+    dependencies:
+      - Frontend lint
+    task:
+      jobs:
+        - name: Build
+          commands: []
+  - name: Backend lint
     dependencies: []
     task:
       jobs:
-        - name: 'Job #1'
-          commands: []
-  - name: 'Block #8'
-    dependencies:
-      - Frontend build
-    task:
-      jobs:
-        - name: 'Job #1'
+        - name: Lint
           commands: []
